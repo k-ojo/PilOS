@@ -9,7 +9,9 @@ typedef unsigned int Elf32_Word;
 
 /**
  * Elf32_Ehdr- the ELF header struct
- * @e_type: This member identifies the object file type. 
+ * @e_type: This member identifies the object file type.
+ * @e_machine:
+ * @e_version:
  */
 typedef struct {
     unsigned char e_ident[EI_NIDENT];
