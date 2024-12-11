@@ -7,6 +7,10 @@ typedef unsigned int Elf32_Word;
 
 #define EI_NIDENT  16
 
+/**
+ * Elf32_Ehdr- the ELF header struct
+ * @e_type: This member identifies the object file type. 
+ */
 typedef struct {
     unsigned char e_ident[EI_NIDENT];
     Elf32_Half e_type;
