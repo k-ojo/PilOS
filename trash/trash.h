@@ -44,19 +44,19 @@ typedef unsigned int Elf32_Word;
 /**
  * Elf32_Ehdr- the ELF header struct
  * @e_ident: identify file as an elf file
- * @e_type: This member identifies the object file type.
- * @e_machine:
- * @e_version:
- * @e_entry:
- * @e_phoff:
- * @e_shoff:
- * @e_flags:
- * @e_ehsize:
- * @e_phentsize:
- * @e_phnum:
- * @e_shentsize:
- * @e_shnum:
- * @e_shstrndx:
+ * @e_type: identifies the object file type.
+ * @e_machine: specifies the required architecture for an individual file.
+ * @e_version: identifies the object file version.
+ * @e_entry: gives the virtual address to which the system first transfers control.
+ * @e_phoff: holds the program header table's file offset in bytes
+ * @e_shoff: holds the section header table's file offset in bytes.
+ * @e_flags: holds processor-specific flags associated with the file
+ * @e_ehsize: This member holds the ELF header's size in bytes
+ * @e_phentsize: holds the size in bytes of one entry in the file's program header table
+ * @e_phnum: holds the number of entries in the program header table
+ * @e_shentsize: holds a section header's size in bytes
+ * @e_shnum: holds the number of entries in the section header table.
+ * @e_shstrndx:holds the section header table index of the entry associated with the section name string table.
  */
 typedef struct {
     unsigned char e_ident[EI_NIDENT];
