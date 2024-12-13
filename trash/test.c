@@ -1,15 +1,11 @@
 #include "trash.h"
 #include <stdio.h>
+#include "../lib/lib.h"
 
-void counter() {
-    static int count = 0; // Initialized only once
-    count++;
-    printf("Count: %d\n", count);
-}
+int main(void){
 
-int main() {
-    counter(); // Count: 1
-    counter(); // Count: 2
-    counter(); // Count: 3
-    return 0;
+    char * buff = "Hello, I am gideon from nowhere, going to somewhere I don't know\n"; 
+    uint8_t *mess = (uint8_t *)buff;
+    printf("%u\n", crc32_byte(mess, 8));
+    return (0);
 }
