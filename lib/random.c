@@ -13,3 +13,8 @@ void srand(unsigned int seed)
 {
     next = seed;
 }
+
+int trunc(float x)
+{
+    return ((int)x);   
+}
