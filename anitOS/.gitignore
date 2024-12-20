@@ -1,0 +1,10 @@
+#executables
+*.bin
+*.elf
+build
+
+#object files
+*.object
+
+#iso files
+*.iso
