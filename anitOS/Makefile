@@ -1,27 +1,28 @@
-kernel := kernel.bin
+default: run
 
-linker_script := linker.ld
-assembly_source_files := $(wildcard *.asm)
-assembly_object_files := $(patsubst %.asm, build/%.o, $(assembly_source_files))
+.PHONY: default build run clean
 
-.PHONY: all clean kernel qemu qemu-gdb
+multiboot_header.o: multiboot_header.asm
+	mkdir -p build
+	nasm -f elf64 multiboot_header.asm
 
-all: $(kernel)
+boot.o: boot.asm
+	mkdir -p build
+	nasm -f elf64 boot.asm
+
+kernel.bin: multiboot_header.o boot.o linker.ld
+	ld -m elf_x86_64 -n -o build/kernel.bin -T linker.ld build/multiboot_header.o build/boot.o
+
+default: os.iso
+
+os.iso: kernel.bin grub.cfg
+	mkdir -p  build/isofiles/boot/grub
+	cp grub.cfg build/isofiles/boot/grub
+	cp build/kernel.bin build/isofiles/boot/
+	grub-mkrescue -o build/os.iso build/isofiles
+
+run: os.iso
+	qemu-system-x86_64 -cdrom os.iso
 
 clean:
-	- @rm -fr build *.o $(kernel)
-	- @rm -f serial.log
-
-qemu: $(kernel)
-	qemu-system-x86_64 -vga std -s -serial file:serial.log -kernel $(kernel)
-
-qemu-gdb: $(kernel)
-	qemu-system-x86_64 -vga std -s -serial file:serial.log -S -kernel $(kernel)
-
-$(kernel): $(assembly_object_files) $(linker_script)
-	ld -m elf_i386 -n -T $(linker_script) -o $(kernel) $(assembly_object_files)
-
-# compile assembly files
-build/%.o: %.asm
-	@mkdir -p $(shell dirname $@)
-	nasm -felf32 $< -o $@
+	rm -rf build

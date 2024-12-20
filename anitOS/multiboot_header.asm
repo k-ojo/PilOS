@@ -13,7 +13,7 @@ section .multiboot_header
     MULTIBOOT_CHECKSUM	equ - (MULTIBOOT_HEADER_MAGIC + MULTIBOOT_HEADER_FLAGS)  ; checksum 
                                 ; (magic number + checksum + flags should equal 0)
 
-    ; This is the GRUB Multiboot header. A boot signature
+    ; This is the GRUB Multiboot header.
     dd MULTIBOOT_HEADER_MAGIC
     dd MULTIBOOT_HEADER_FLAGS
     dd MULTIBOOT_CHECKSUM
