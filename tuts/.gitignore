@@ -1,0 +1,8 @@
+# disk files
+iso
+
+#executables
+*.o
+*.exe
+*.elf
+*.bin
