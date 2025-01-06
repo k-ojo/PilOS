@@ -11,7 +11,7 @@ build/boot.o: boot.asm
 	nasm -f elf64 boot.asm -o build/boot.o
 
 build/kernel.bin: build/multiboot_header.o build/boot.o linker.ld
-	ld -m elf_x86_64 -n -o build/kernel.bin -T linker.ld build/multiboot_header.o build/boot.o
+	ld -n -o build/kernel.bin -T linker.ld build/multiboot_header.o build/boot.o
 
 
 build/os.iso: build/kernel.bin grub.cfg
@@ -22,6 +22,7 @@ build/os.iso: build/kernel.bin grub.cfg
 
 run: build/os.iso
 	qemu-system-x86_64 -cdrom build/os.iso
-
+	
+build: build/os.iso
 clean:
 	rm -rf build

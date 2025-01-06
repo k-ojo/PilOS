@@ -1,17 +1,37 @@
 ENTRY(start)
 
 SECTIONS {
-    . = 0x100000; /* Tells GRUB to load the kernel starting at the 1MB */
+    /* Set the entry point of the kernel at the start of the file */
+    . = 1M;
 
+    /* Ensure the multiboot header is at the very beginning */
     .boot :
     {
-        /* Ensure that the multiboot header is at the beginning */
-        *(.multiboot_header)
+        KEEP(*(.multiboot_header))  /* Keep the Multiboot header section */
     }
 
+    /* Place the .text section (code) after the multiboot header */
     .text :
     {
         *(.text)
     }
 
+    /* Place any read-only data here */
+    .rodata :
+    {
+        *(.rodata)
+    }
+
+    /* Place initialized data here */
+    .data :
+    {
+        *(.data)
+    }
+
+    /* BSS section for uninitialized data */
+    .bss :
+    {
+        *(COMMON)
+        *(.bss)
+    }
 }
