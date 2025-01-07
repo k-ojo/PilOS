@@ -1,5 +1,5 @@
 # disk files
-iso
+iso*
 
 #executables
 *.o
