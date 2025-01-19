@@ -1,9 +1,0 @@
-# disk files
-iso*
-tmp
-
-#executables
-*.o
-*.exe
-*.elf
-*.bin
