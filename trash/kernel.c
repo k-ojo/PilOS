@@ -10,7 +10,6 @@
 #error "This tutorial needs to be compiled with a ix86-elf compiler"
 #endif
 
-
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
 
@@ -19,17 +18,7 @@ size_t terminal_column;
 uint8_t terminal_color;
 uint16_t* terminal_buffer;
 
-static inline uint8_t vga_entry_color(vga_color fg, vga_color bg) 
-{
-	return fg | bg << 4;
-}
 
-/**
-* vga_entry- */
-static inline uint16_t vga_entry(unsigned char uc, uint8_t color) 
-{
-	return (uint16_t) uc | (uint16_t) color << 8;
-}
 
 /**
 * strlen- calculates the len of a string
@@ -45,7 +34,7 @@ size_t strlen(const char* str)
 }
 
 /**
- * terminal_iniatilize: 
+ * terminal_iniatilize- initializes the VGA with space ' ' as place-holder  
  * 
  * Return: nothing
 **/
@@ -63,7 +52,12 @@ void terminal_initialize(void)
 	}
 }
 
-void scroll()
+/**
+ * scroll- scrolls the screen down
+ * 
+ * Return: Nothing
+ */
+void scroll(void)
 {
 	for (size_t y = 0; y < VGA_HEIGHT; y++) {
 		for (size_t x = 0; x < VGA_WIDTH; x++) {
@@ -77,16 +71,34 @@ void scroll()
 	}
 }
 
+/**
+ * terminal_setcolor- sets the color of the terminal
+ * @color: the input color
+ */
 void terminal_setcolor(uint8_t color) 
 {
 	terminal_color = color;
 }
+
+/**
+ * termial_putentryat: outputs character c to screen
+ * @c: character to be printed to terminal
+ * @color: color of the character
+ * @x: x coordinate on screen
+ * @y: y coordinate on screen
+ * 
+ */
 void terminal_putentryat(char c, uint8_t color, size_t x, size_t y) 
 {
 	const size_t index = y * VGA_WIDTH + x;
 	terminal_buffer[index] = vga_entry(c, color);
 }
 
+/**
+ * terminal_putchar: puts character to screen
+ * @c: input character on screen
+ * Return: Nothing
+ */
 void terminal_putchar(char c) 
 {
 	if (c == '\n'){
@@ -109,21 +121,28 @@ void terminal_putchar(char c)
 	}
 }
 
+/**
+ * terminal_write- writes a string to the screen
+ * @dat: input string
+ * @size: input size
+ * 
+ * Return: nothing
+ */
 void terminal_write(const char* data, size_t size) 
 {
 	for (size_t i = 0; i < size; i++)
 		terminal_putchar(data[i]);
 }
 
+/**
+ * terminal_writestring: writes strings to screen
+ * @data: Input data
+ * 
+ * Return: Nothing
+ */
 void terminal_writestring(const char* data) 
 {
 	terminal_write(data, strlen(data));
-}
-
-void test_scroll() {
-	for (size_t y = 0; y < VGA_HEIGHT + 5; y++)
-		for (size_t x = 0; x < VGA_WIDTH; x++)
-			terminal_putchar('A' + (y % 26));
 }
 
 void kernel_main(void) 
