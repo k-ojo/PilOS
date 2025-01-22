@@ -18,8 +18,6 @@ size_t terminal_column;
 uint8_t terminal_color;
 uint16_t* terminal_buffer;
 
-
-
 /**
 * strlen- calculates the len of a string
 * @str: input string
@@ -145,6 +143,11 @@ void terminal_writestring(const char* data)
 	terminal_write(data, strlen(data));
 }
 
+/**
+ * kernel_main- kernel entry point
+ * 
+ * Return: Nothing
+ */
 void kernel_main(void) 
 {
 	/* Initialize terminal interface */
