@@ -33,7 +33,7 @@ typedef enum vga_color {
  */
 static inline uint8_t vga_entry_color(vga_color fg, vga_color bg) 
 {
-	return fg | bg << 4;
+	return fg | bg << 4;  //shifts are performed before |
 }
 
 /**
