@@ -46,7 +46,7 @@ OBJS=\
 $(FREEOBJS) \
 $(HOSTEDOBJS) \
 
-CFLAGS:=$(CFLAGS) -fstack-protector
+CFLAGS:=$(CFLAGS) -fstack-protector -nostdlib
 
 LIBK_OBJS=$(FREEOBJS:.o=.libk.o)
 
