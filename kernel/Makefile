@@ -47,6 +47,8 @@ $(LIBS) \
 $(ARCHDIR)/crtend.o \
 $(ARCHDIR)/crtn.o \
 
+CFLAGS:=$(CFLAGS) -fstack-protector -nostdlib
+
 .PHONY: all clean install install-headers install-kernel
 .SUFFIXES: .o .c .S
 

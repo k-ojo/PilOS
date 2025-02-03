@@ -46,6 +46,8 @@ OBJS=\
 $(FREEOBJS) \
 $(HOSTEDOBJS) \
 
+CFLAGS:=$(CFLAGS) -fstack-protector
+
 LIBK_OBJS=$(FREEOBJS:.o=.libk.o)
 
 #BINARIES=libc.a libk.a # Not ready for libc yet.
