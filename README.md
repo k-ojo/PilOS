@@ -22,6 +22,8 @@ Ensure you have the following installed:
 - `make`
 - `nasm` (for assembly)
 - `qemu` (for testing)
+- `Xorriso`
+- `GNU make` (4.0 or later)
 - `git`
 
 ### 🔹 Step 1: Installing Dependencies
@@ -78,13 +80,13 @@ Once you have the cross-compiler set up, clone the repository and compile the ke
 ```sh
 git clone https://github.com/yourusername/PilOS.git
 cd PilOS
-make
+./build.sh
 ```
 
 ## 🚀 Running PilOS
 Test PilOS using QEMU:
 ```sh
-make run
+./quemu.sh
 ```
 
 ---
@@ -100,4 +102,4 @@ We welcome contributions! If you're interested in contributing:
    ```sh
    git checkout -b feature-name
    ```
-4. Make your changes, commit, and
+4. Make your changes, commit, and pull request
